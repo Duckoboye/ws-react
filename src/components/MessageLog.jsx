@@ -1,17 +1,10 @@
 import React from 'react';
 import Message from './Message';
-const MessageLog = () => {
-	const messages = [
-		'Hello',
-		'testing',
-		'hohoho so quirky',
-		'bababooey',
-		'stinky boy go sleep',
-	];
-
+const MessageLog = ({ messageList }) => {
+	console.log(messageList);
 	return (
 		<section>
-			{messages.map((message, index) => {
+			{messageList.map((message, index) => {
 				return <Message msg={message} key={index} />;
 			})}
 		</section>

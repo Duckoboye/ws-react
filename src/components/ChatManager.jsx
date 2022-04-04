@@ -3,11 +3,10 @@ import MessageLog from './MessageLog';
 const ws = new WebSocket('ws://localhost:8989');
 
 const ChatManager = () => {
-	const handleMessage = (message) => {
-		console.log(`[WebSocket] New message: ${message}`);
-	};
+	const messageList = ['Test'];
 	ws.onmessage = (e) => {
-		handleMessage(e.data);
+		console.log(`[WebSocket] New message: ${e.data}`);
+		messageList.push(e.data);
 	};
 	ws.onopen = (e) => {
 		console.log('WS open');
@@ -16,7 +15,7 @@ const ChatManager = () => {
 	return (
 		<section>
 			<SendMessage ws={ws} />
-			<MessageLog />
+			<MessageLog messageList={messageList} />
 		</section>
 	);
 };
