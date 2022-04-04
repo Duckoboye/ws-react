@@ -1,16 +1,23 @@
-import { useState } from 'react';
 import SendMessage from './SendMessage';
-const ChatManager = () => {
-	const ws = new WebSocket('ws://localhost:8989');
+import MessageLog from './MessageLog';
+const ws = new WebSocket('ws://localhost:8989');
 
+const ChatManager = () => {
+	const handleMessage = (message) => {
+		console.log(`[WebSocket] New message: ${message}`);
+	};
+	ws.onmessage = (e) => {
+		handleMessage(e.data);
+	};
 	ws.onopen = (e) => {
 		console.log('WS open');
 	};
 
 	return (
-		<div>
+		<section>
 			<SendMessage ws={ws} />
-		</div>
+			<MessageLog />
+		</section>
 	);
 };
 

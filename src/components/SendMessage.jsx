@@ -3,13 +3,6 @@ import { useState } from 'react';
 const SendMessage = ({ ws }) => {
 	const [messageState, setMessageState] = useState('');
 
-	const handleMessage = (message) => {
-		console.log(`[WebSocket] New message: ${message}`);
-	};
-	ws.onmessage = (e) => {
-		handleMessage(e.data);
-	};
-
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		ws.send(messageState);
@@ -22,7 +15,9 @@ const SendMessage = ({ ws }) => {
 		<form onSubmit={handleSubmit}>
 			<label htmlFor="messageInput"></label>
 			<input type="text" name="messageInput" onChange={handleInput} />
-			<button type="submit">Send!</button>
+			<button type="submit" disabled={!messageState}>
+				Send!
+			</button>
 		</form>
 	);
 };
