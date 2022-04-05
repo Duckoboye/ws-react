@@ -14,7 +14,12 @@ const SendMessage = ({ ws }) => {
 	return (
 		<form onSubmit={handleSubmit}>
 			<label htmlFor="messageInput"></label>
-			<input type="text" name="messageInput" onChange={handleInput} />
+			<input
+				type="text"
+				name="messageInput"
+				onChange={handleInput}
+				autoComplete="off"
+			/>
 			<button type="submit" disabled={!messageState}>
 				Send!
 			</button>

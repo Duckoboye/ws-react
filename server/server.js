@@ -1,4 +1,4 @@
-const { Server, OPEN } = require('ws');
+const { Server, WebSocket } = require('ws');
 const { randomUUID } = require('crypto');
 require('dotenv').config();
 const wsSettings = {
@@ -22,7 +22,8 @@ connection
 			);
 			//TODO: Implement broadcasting to all clients.
 			connection.clients.forEach((client) => {
-				if (client.readyState === OPEN) client.send(message.toString());
+				if (client.readyState === WebSocket.OPEN)
+					client.send(`${ws.id}: ${message.toString()}`);
 			});
 			//ws.send(message.toString()); //Echo for testing. Remove when no longer using.
 		}).on('close', () => {

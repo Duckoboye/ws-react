@@ -3,7 +3,7 @@ import React from 'react';
 const Message = ({ msg }) => {
 	return (
 		<section>
-			<h3>{msg}</h3>
+			<p1>{msg}</p1>
 		</section>
 	);
 };
