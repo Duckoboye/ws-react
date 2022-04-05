@@ -1,7 +1,8 @@
 const { Server, OPEN } = require('ws');
 const { randomUUID } = require('crypto');
+require('dotenv').config();
 const wsSettings = {
-	port: 8989,
+	port: process.env.REACT_APP_WS_PORT,
 };
 
 const connection = new Server(wsSettings);
