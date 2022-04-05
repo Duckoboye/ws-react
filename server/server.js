@@ -1,4 +1,4 @@
-const { Server } = require('ws');
+const { Server, OPEN } = require('ws');
 const { randomUUID } = require('crypto');
 const wsSettings = {
 	port: 8989,
@@ -19,7 +19,11 @@ connection
 			console.log(
 				Date.now() + ` [WebsocketServer] ${ws.id}: ${message.toString()}`
 			);
-			ws.send(message.toString()); //Echo for testing. Remove when no longer using.
+			//TODO: Implement broadcasting to all clients.
+			connection.clients.forEach((client) => {
+				if (client.readyState === OPEN) client.send(message.toString());
+			});
+			//ws.send(message.toString()); //Echo for testing. Remove when no longer using.
 		}).on('close', () => {
 			console.log(
 				Date.now() + ` [WebsocketServer] Client ${ws.id} disconnected`

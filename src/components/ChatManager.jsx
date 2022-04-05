@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import SendMessage from './SendMessage';
 import MessageLog from './MessageLog';
-const ws = new WebSocket('ws://localhost:8989');
+const ws = new WebSocket('ws://192.168.1.107:8989');
 const ChatManager = () => {
 	const [messageList, setMessageList] = useState([]);
 	//const messageList = ['Test']; //Old solution
