@@ -1,15 +1,17 @@
+import { useState } from 'react';
 import SendMessage from './SendMessage';
 import MessageLog from './MessageLog';
 const ws = new WebSocket('ws://localhost:8989');
-
 const ChatManager = () => {
-	const messageList = ['Test'];
-	ws.onmessage = (e) => {
-		console.log(`[WebSocket] New message: ${e.data}`);
-		messageList.push(e.data);
+	const [messageList, setMessageList] = useState([]);
+	//const messageList = ['Test']; //Old solution
+	ws.onmessage = ({ data }) => {
+		console.log(`[WebSocket] New message: ${data}`);
+		//messageList.push(e.data);  //Old solution
+		setMessageList([...messageList, data]);
 	};
 	ws.onopen = (e) => {
-		console.log('WS open');
+		console.log('[WebSocket] Connection established');
 	};
 
 	return (
